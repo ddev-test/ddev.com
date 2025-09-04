@@ -23,3 +23,5 @@ We're right where we were a year ago!
 - [Mastodon↗](https://fosstodon.org/@ddev)
 - [Bluesky↗](https://bsky.app/profile/ddev.bsky.social)
 - [Discord↗](/s/discord)
+
+And a bit more.
