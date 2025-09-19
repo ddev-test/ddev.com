@@ -1,4 +1,3 @@
-name: ddev.com
 type: php
 docroot: dist
 php_version: "8.1"
