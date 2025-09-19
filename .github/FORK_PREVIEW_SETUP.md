@@ -13,9 +13,13 @@ The workflow in `.github/workflows/cloudflare-preview-forks.yml` implements a se
 
 ### 1. Cloudflare Pages Project
 
-The workflow uses a dedicated `ddev-com-fork-previews` Cloudflare Pages project for security isolation from the main site.
+Create a **Direct Upload** Cloudflare Pages project (not Git-connected):
 
-**No additional project setup needed** - the project is already configured and the workflow will create stable preview deployments using Cloudflare's Direct Upload API.
+1. Go to [Cloudflare Pages](https://dash.cloudflare.com/pages)
+2. Click "Create a project"
+3. Choose "Direct Upload" (not "Connect to Git")
+4. Name your project (e.g., `ddev-com-fork-previews`)
+5. Note the project name for step 3
 
 ### 2. Cloudflare API Token
 
@@ -31,19 +35,13 @@ Create an API token with Pages permissions:
 5. Set account and zone resources as needed
 6. Save the token
 
-### 3. Repository Secrets and Variables
+### 3. Repository Secrets
 
-Add these in GitHub repository settings → Secrets and variables → Actions:
+Add these secrets in GitHub repository settings → Secrets and variables → Actions:
 
-**Repository Secrets:**
-
-- `TESTS_SERVICE_ACCOUNT_TOKEN`: 1Password service account token (if not already configured)
-- Note: `CF_API_TOKEN` is loaded from 1Password `test-secrets` vault, not directly as a repository secret
-
-**Repository Variables:**
-
+- `CF_API_TOKEN`: The API token from step 2
 - `CF_ACCOUNT_ID`: Your Cloudflare Account ID (found in dashboard sidebar)
-- `CF_PAGES_PROJECT`: Set to `ddev-com-fork-previews` (dedicated fork preview project)
+- `CF_PAGES_PROJECT`: The project name from step 1
 
 ### 4. Repository Variables (Optional)
 
@@ -95,7 +93,7 @@ The workflow is triggered automatically for:
 
 1. Downloads build artifact from Stage 1
 2. Deploys to Cloudflare Pages using API
-3. Creates stable preview URL: `https://{hash}.ddev-com-fork-previews.pages.dev`
+3. Creates stable preview URL: `https://project.pages.dev/pr-{number}`
 4. Comments preview URL on the PR
 5. Updates comment on subsequent pushes
 
@@ -129,9 +127,9 @@ The workflow is triggered automatically for:
 
 ### Preview URL Issues
 
-- Verify `ddev-com-fork-previews` Cloudflare Pages project exists and is accessible
-- Check account ID matches the project's organization
-- Ensure `CF_PAGES_PROJECT` is set to `ddev-com-fork-previews`
+- Verify Cloudflare Pages project exists
+- Check account ID matches organization
+- Ensure project name in `CF_PAGES_PROJECT` is exact
 
 ## Manual Testing
 
