@@ -1,6 +1,6 @@
 ---
 title: "DDEV August 2026 Newsletter"
-pubDate: 2026-09-12
+pubDate: 2026-10-12
 #modifiedDate: 2025-04-07
 summary: "Did nothing at all happen in the last year???"
 author: Randy Fay
